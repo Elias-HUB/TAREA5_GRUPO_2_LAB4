@@ -2,6 +2,24 @@ package entidad;
 
 public class Persona {
 	private String dni;
+	private String nombre;
+	private String apellido;
+	
+	
+	public Persona()
+	{
+		
+	}			
+			
+	public Persona(String Dni, String nombre, String Apellido)
+	{
+		this.dni = Dni;
+		this.nombre = nombre;
+		this.apellido = Apellido;
+	}
+	
+	
+	
 	public String getDni() {
 		return dni;
 	}
@@ -23,16 +41,6 @@ public class Persona {
 	}
 
 	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	private String nombre;
-	private String apellido;
-	
-	public Persona(String dni, String nombre, String apellido)
-	{
-		this.dni = dni;
-		this.nombre = nombre;
 		this.apellido = apellido;
 	}
 
