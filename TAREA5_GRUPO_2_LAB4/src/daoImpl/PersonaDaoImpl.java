@@ -42,8 +42,7 @@ public abstract class PersonaDaoImpl implements PersonaDao{
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-		}
-		
+		}		
 		return isInsertExitoso;
 	}
 	
