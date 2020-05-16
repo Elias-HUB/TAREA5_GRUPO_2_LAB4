@@ -13,41 +13,59 @@ import presentacion.vista.Modificar;
 public class Controlador  implements ActionListener {
 
 	private Menu menu;
-	private Agregar pnlIngreso;
+	private Agregar pnlAgregar;
 	private Eliminar pnlEliminar;
 	private Modificar pnlModificar; 
 	private PersonaNegocio pNeg;
 	private ArrayList<Persona> personasEnTabla;
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-	}
+
 	
 	//Constructor
 	public Controlador(Menu menu)//, PersonaNegocio pNeg)
 	{
 		//Guardo todas las instancias que recibo en el constructor
 		this.menu = menu;
-		this.pNeg = pNeg;
+		//this.pNeg = pNeg;
 		
 		//Instancio los paneles
-		this.pnlAgregar = new PanelAgregarPersonas();
-		this.pnlEliminarPersonas = new PanelEliminarPersonas();
+		this.pnlAgregar = new Agregar();
+		this.pnlEliminar = new Eliminar();
+		this.pnlModificar = new Modificar();
+		
 		
 		//Enlazo todos los eventos
 		
 		//Eventos menu del Frame principal llamado Ventana
-		this.ventanaPrincipal.getMenuAgregar().addActionListener(a->EventoClickMenu_AbrirPanel_AgregarPersona(a));
-		this.ventanaPrincipal.getMenuEliminar().addActionListener(a->EventoClickMenu_AbrirPanel_EliminarPersona(a));
+		this.menu.getMenuAgregar().addActionListener(a->EventoClickMenu_AbrirPanel_AgregarPersona(a));
+		//this.menu.getMenuEliminar().addActionListener(a->EventoClickMenu_AbrirPanel_EliminarPersona(a));
 
 		//Eventos PanelAgregarPersonas
-		 this.pnlIngresoPersonas.getBtnAgregar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
-		 this.pnlIngresoPersonas.getBtnBorrar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelAgregarPersonas(s));
+		// this.pnlAgregar.getBtnAgregar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
+		// this.pnlIngreso.getBtnBorrar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelAgregarPersonas(s));
 			
 		//Eventos PanelEliminarPersonas
-		 this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));
+		// this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));
 		 
 		}
+	
+	//EventoClickMenu abrir PanelAgregarPersonas
+	public void  EventoClickMenu_AbrirPanel_AgregarPersona(ActionEvent a)
+	{		
+		menu.getContentPane().removeAll();
+		menu.getContentPane().add(pnlAgregar);
+		menu.getContentPane().repaint();
+		menu.getContentPane().revalidate();
+	}
+	
+	public void inicializar()
+	{
+		this.menu.setVisible(true);;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+	}
 	
 }

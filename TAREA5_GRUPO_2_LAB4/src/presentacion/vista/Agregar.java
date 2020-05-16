@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.AbstractButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -14,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.Insets;
 
 public class Agregar extends JPanel {
+	
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtDni;
@@ -21,6 +24,8 @@ public class Agregar extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
+	
 	public Agregar() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 104, 214, 0, 0, 0};
@@ -87,6 +92,8 @@ public class Agregar extends JPanel {
 		gbc_btnAceptar.gridx = 2;
 		gbc_btnAceptar.gridy = 8;
 		add(btnAceptar, gbc_btnAceptar);
-
 	}
+
+
+
 }
