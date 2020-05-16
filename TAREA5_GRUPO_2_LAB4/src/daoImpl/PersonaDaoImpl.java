@@ -10,7 +10,7 @@ import java.util.List;
 import dao.PersonaDao;
 import entidad.Persona;
 
-public abstract class PersonaDaoImpl implements PersonaDao{
+public class PersonaDaoImpl implements PersonaDao{
 	
 	private static final String insert = "INSERT INTO personas(dni, nombre, apellido) VALUES(?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE dni = ?";
