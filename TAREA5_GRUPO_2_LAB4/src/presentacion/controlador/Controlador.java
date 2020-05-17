@@ -3,6 +3,9 @@ package presentacion.controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+
 import entidad.Persona;
 import negocio.PersonaNegocio;
 import presentacion.vista.Agregar;
@@ -44,7 +47,7 @@ public class Controlador  implements ActionListener {
 		this.menu.getMenuListar().addActionListener(a->EventoClickMenu_AbrirPanel_Listar(a));
 		//Eventos PanelAgregarPersonas
 		this.pnlAgregar.getbtnAceptar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
-		//this.pnlIngreso.getBtnBorrar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelAgregarPersonas(s));
+		//this.pnlListar.getBtnBorrar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelAgregarPersonas(s));
 			
 		//Eventos PanelEliminarPersonas
 		// this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));		 
@@ -104,7 +107,8 @@ public class Controlador  implements ActionListener {
 		menu.getContentPane().removeAll();
 		menu.getContentPane().add(pnlListar);
 		menu.getContentPane().repaint();
-		menu.getContentPane().revalidate();	
+		menu.getContentPane().revalidate();
+		DefaultListModel lista = new DefaultListModel ();
 	}
 	
 	public void inicializar()
