@@ -85,4 +85,12 @@ public class Menu extends JFrame {
 	public void setMenuEliminar(JMenuItem menuEliminar) {
 		this.MnEliminar = menuEliminar;
 	}
+	
+	public JMenuItem getMenuListar() {
+		return MnListar;
+	}
+
+	public void setMenuListar(JMenuItem menuListar) {
+		this.MnListar = MnListar;
+	}
 }

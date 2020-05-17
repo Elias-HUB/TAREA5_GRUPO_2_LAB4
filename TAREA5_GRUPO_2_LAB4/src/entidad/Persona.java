@@ -17,9 +17,12 @@ public class Persona {
 		this.nombre = nombre;
 		this.apellido = Apellido;
 	}
-	
-	
-	
+		
+	@Override
+	public String toString() {
+		return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + "]";
+	}
+
 	public String getDni() {
 		return dni;
 	}
