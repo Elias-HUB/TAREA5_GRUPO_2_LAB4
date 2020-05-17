@@ -1,16 +1,11 @@
 package presentacion.vista;
 
 import javax.swing.JPanel;
-import java.awt.FlowLayout;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import net.miginfocom.swing.MigLayout;
 
-import javax.swing.AbstractButton;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
