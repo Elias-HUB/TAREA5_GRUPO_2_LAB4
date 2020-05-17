@@ -65,7 +65,23 @@ public class Controlador  implements ActionListener {
 	
 
 	private void EventoClickBoton_BorrarPesona_PanelEliminarPersonas(ActionEvent s) {
-		
+		boolean estado=false;
+		//int filasSeleccionadas = this.pnlEliminar.getList().getSelectedIndex();
+		Persona persona = new Persona();
+		persona = this.pnlEliminar.getList().getSelectedValue();
+		String mensaje;
+		estado = pNeg.delete(persona);
+		if(estado==true)
+		{
+			mensaje="Persona eliminada con exito";	
+		}
+		else
+		{
+			 mensaje="Id inexistente";
+		}
+		this.pnlEliminar.mostrarMensaje(mensaje);
+		pnlEliminar.setListModelClear(listModel);
+		refrescarJlistEliminar();
 	}
 
 
@@ -108,13 +124,17 @@ public class Controlador  implements ActionListener {
 		menu.getContentPane().add(pnlEliminar);
 		menu.getContentPane().repaint();
 		menu.getContentPane().revalidate();	
-
+		pnlEliminar.setListModelClear(listModel);
+		refrescarJlistEliminar();		
+	}
+	
+	public void refrescarJlistEliminar() {		
 		personasEnTabla = (ArrayList<Persona>) pNeg.readAll();
 		for (Persona item: personasEnTabla)
 			listModel.addElement(item);		
 		pnlEliminar.setListModel(listModel);
-		
 	}
+	
 	
 	public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
 	{

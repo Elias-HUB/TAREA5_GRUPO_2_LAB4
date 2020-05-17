@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -89,8 +90,20 @@ public class Eliminar extends JPanel {
 	}
 
 
-	public void setListModel(DefaultListModel<Persona> listModel) {
+	public void setListModel(DefaultListModel<Persona> listModel) {		
 		this.list.setModel(listModel);
+	}
+	
+	
+	public void setListModelClear(DefaultListModel<Persona> listModel) {	
+		listModel.clear();
+		this.list.setModel(listModel);
+	}
+	
+	
+	
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje);		
 	}
 
 }

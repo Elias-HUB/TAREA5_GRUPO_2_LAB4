@@ -20,7 +20,7 @@ public class Persona {
 		
 	@Override
 	public String toString() {
-		return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + "]";
+		return "Dni=" + dni + ", Nombre=" + nombre + ", Apellido=" + apellido;
 	}
 
 	public String getDni() {
