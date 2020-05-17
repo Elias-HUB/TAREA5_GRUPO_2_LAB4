@@ -139,5 +139,12 @@ public class Controlador  implements ActionListener {
 	{
 		this.menu.setVisible(true);;
 	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
