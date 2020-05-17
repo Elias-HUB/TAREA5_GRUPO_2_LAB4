@@ -96,6 +96,7 @@ public class Agregar extends JPanel {
 		add(btnAceptar, gbc_btnAceptar);
 	}
 
+	
 	public JTextField gettxtNombre() {
 		return txtNombre;
 	}
