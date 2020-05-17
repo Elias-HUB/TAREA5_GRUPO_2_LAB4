@@ -12,7 +12,7 @@ public class Principal {
 		
 		Menu menu = new Menu(); 
 		PersonaNegocio negocio = new PersonaNegocioImpl();
-		Controlador controlador = new Controlador(menu);
+		Controlador controlador = new Controlador(menu,negocio);
 		controlador.inicializar();
 		menu.setVisible(true);
 	}

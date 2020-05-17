@@ -9,6 +9,7 @@ import presentacion.vista.Agregar;
 import presentacion.vista.Eliminar;
 import presentacion.vista.Menu;
 import presentacion.vista.Modificar;
+import negocio.*;
 
 public class Controlador  implements ActionListener {
 
@@ -22,11 +23,11 @@ public class Controlador  implements ActionListener {
 
 	
 	//Constructor
-	public Controlador(Menu menu)//, PersonaNegocio pNeg)
+	public Controlador(Menu menu, PersonaNegocio personaNegocio)//, PersonaNegocio pNeg)
 	{
 		//Guardo todas las instancias que recibo en el constructor
 		this.menu = menu;
-		//this.pNeg = pNeg;
+		this.pNeg = personaNegocio;
 		
 		//Instancio los paneles
 		this.pnlAgregar = new Agregar();
@@ -41,14 +42,37 @@ public class Controlador  implements ActionListener {
 		//this.menu.getMenuEliminar().addActionListener(a->EventoClickMenu_AbrirPanel_EliminarPersona(a));
 
 		//Eventos PanelAgregarPersonas
-		// this.pnlAgregar.getBtnAgregar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
+		this.pnlAgregar.getbtnAceptar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
 		// this.pnlIngreso.getBtnBorrar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelAgregarPersonas(s));
 			
 		//Eventos PanelEliminarPersonas
-		// this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));
-		 
+		// this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));		 
 		}
 	
+	private void EventoClickBoton_AgregarPesona_PanelAgregarPersonas(ActionEvent a) {
+		
+		String nombre = this.pnlAgregar.gettxtNombre().getText();
+		String apellido = this.pnlAgregar.gettxtApellido().getText();
+		String dni = this.pnlAgregar.gettxtDni().getText();
+		Persona nuevaPersona = new Persona(dni,nombre,apellido);
+		
+		boolean estado = pNeg.insert(nuevaPersona);
+		String mensaje;
+		if(estado==true)
+		{
+			mensaje="Persona agregada con exito";
+			this.pnlAgregar.gettxtNombre().setText("");
+			this.pnlAgregar.gettxtApellido().setText("");
+			this.pnlAgregar.gettxtDni().setText("");
+		}
+		else
+			mensaje="Persona no agregada, complete todos los campos";
+		
+		this.pnlAgregar.mostrarMensaje(mensaje);		
+	}
+	
+	
+
 	//EventoClickMenu abrir PanelAgregarPersonas
 	public void  EventoClickMenu_AbrirPanel_AgregarPersona(ActionEvent a)
 	{		

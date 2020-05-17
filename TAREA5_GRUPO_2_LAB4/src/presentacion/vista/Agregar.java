@@ -12,6 +12,7 @@ import javax.swing.AbstractButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Insets;
 
@@ -20,6 +21,7 @@ public class Agregar extends JPanel {
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtDni;
+	private JButton btnAceptar;
 
 	/**
 	 * Create the panel.
@@ -85,7 +87,7 @@ public class Agregar extends JPanel {
 		add(txtDni, gbc_txtDni);
 		txtDni.setColumns(10);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
 		gbc_btnAceptar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnAceptar.insets = new Insets(0, 0, 0, 5);
@@ -94,6 +96,40 @@ public class Agregar extends JPanel {
 		add(btnAceptar, gbc_btnAceptar);
 	}
 
+	public JTextField gettxtNombre() {
+		return txtNombre;
+	}
+	public void settxtNombre(JTextField TxtNombre) {
+		this.txtNombre = TxtNombre;
+	}
+	
+	
+	public JTextField gettxtDni() {
+		return txtDni;
+	}
+	public void settxtDni(JTextField TxtDni) {
+		this.txtDni = TxtDni;
+	}
+	
+	
+	public JTextField gettxtApellido() {
+		return txtApellido;
+	}
+	public void settxtApellido(JTextField TxtApellido) {
+		this.txtApellido = TxtApellido;
+	}
+	
+	
+	public JButton getbtnAceptar() {
+		return btnAceptar;
+	}
+	public void setbtnAceptar(JButton BtnAceptar) {
+		this.btnAceptar = BtnAceptar;
+	}
 
+	public void mostrarMensaje(String mensaje)
+	{
+		JOptionPane.showMessageDialog(null, mensaje);
+	}
 
 }
