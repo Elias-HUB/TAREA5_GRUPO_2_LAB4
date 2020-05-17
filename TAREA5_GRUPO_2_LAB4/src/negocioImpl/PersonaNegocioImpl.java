@@ -22,6 +22,7 @@ public class PersonaNegocioImpl implements PersonaNegocio{
 		return estado;
 	}
 
+	
 	@Override
 	public boolean delete(Persona persona_a_eliminar) {
 		boolean estado=false;
@@ -33,10 +34,16 @@ public class PersonaNegocioImpl implements PersonaNegocio{
 	}
 
 	
-	
 	@Override
 	public List<Persona> readAll() {
 		return pdao.readAll();
+	}
+
+	
+	@Override
+	public boolean update(Persona persona_a_modificar) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
