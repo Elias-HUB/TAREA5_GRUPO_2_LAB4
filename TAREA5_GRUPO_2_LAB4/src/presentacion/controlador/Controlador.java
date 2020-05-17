@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 import entidad.Persona;
 import negocio.PersonaNegocio;
@@ -24,6 +25,7 @@ public class Controlador  implements ActionListener {
 	private Listar pnlListar;
 	private PersonaNegocio pNeg;
 	private ArrayList<Persona> personasEnTabla;
+	public static DefaultListModel<Persona> listModel;
 	
 	
 	//Constructor
@@ -32,6 +34,7 @@ public class Controlador  implements ActionListener {
 		//Guardo todas las instancias que recibo en el constructor
 		this.menu = menu;
 		this.pNeg = personaNegocio;
+		listModel = new DefaultListModel<Persona>();
 		
 		//Instancio los paneles
 		this.pnlAgregar = new Agregar();
@@ -41,18 +44,31 @@ public class Controlador  implements ActionListener {
 		//Enlazo todos los eventos
 		
 		//Eventos menu del Frame principal llamado Ventana
-		this.menu.getMenuAgregar().addActionListener(a->EventoClickMenu_AbrirPanel_AgregarPersona(a));
 		this.menu.getMenuEliminar().addActionListener(a->EventoClickMenu_AbrirPanel_EliminarPersona(a));
+		this.menu.getMenuAgregar().addActionListener(a->EventoClickMenu_AbrirPanel_AgregarPersona(a));		
 		this.menu.getMenuModificar().addActionListener(a->EventoClickMenu_AbrirPanel_ModificarPersona(a));
 		this.menu.getMenuListar().addActionListener(a->EventoClickMenu_AbrirPanel_Listar(a));
+		
+		
+		
 		//Eventos PanelAgregarPersonas
 		this.pnlAgregar.getbtnAceptar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
 		//this.pnlListar.getBtnBorrar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelAgregarPersonas(s));
 			
 		//Eventos PanelEliminarPersonas
-		// this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));		 
+		this.pnlEliminar.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));		
+		
+		
+		//Eventos PanelLista
+		//this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));
 		}
 	
+
+	private void EventoClickBoton_BorrarPesona_PanelEliminarPersonas(ActionEvent s) {
+		
+	}
+
+
 	private void EventoClickBoton_AgregarPesona_PanelAgregarPersonas(ActionEvent a) {
 		
 		String nombre = this.pnlAgregar.gettxtNombre().getText();
@@ -86,12 +102,18 @@ public class Controlador  implements ActionListener {
 		menu.getContentPane().revalidate();
 	}
 	
-	public void EventoClickMenu_AbrirPanel_EliminarPersona(ActionEvent a)
+	public void EventoClickMenu_AbrirPanel_EliminarPersona(ActionEvent e)
 	{
 		menu.getContentPane().removeAll();
 		menu.getContentPane().add(pnlEliminar);
 		menu.getContentPane().repaint();
 		menu.getContentPane().revalidate();	
+
+		personasEnTabla = (ArrayList<Persona>) pNeg.readAll();
+		for (Persona item: personasEnTabla)
+			listModel.addElement(item);		
+		pnlEliminar.setListModel(listModel);
+		
 	}
 	
 	public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
@@ -103,22 +125,19 @@ public class Controlador  implements ActionListener {
 	}
 	
 	public void EventoClickMenu_AbrirPanel_Listar(ActionEvent a)
-	{
+	{	
 		menu.getContentPane().removeAll();
 		menu.getContentPane().add(pnlListar);
 		menu.getContentPane().repaint();
 		menu.getContentPane().revalidate();
-		DefaultListModel lista = new DefaultListModel ();
+		
+		personasEnTabla = (ArrayList<Persona>) pNeg.readAll();
+		pnlListar.llenarTabla(personasEnTabla);
 	}
 	
 	public void inicializar()
 	{
 		this.menu.setVisible(true);;
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 	}
 	
 }

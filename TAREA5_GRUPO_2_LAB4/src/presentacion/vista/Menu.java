@@ -1,20 +1,11 @@
 package presentacion.vista;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Menu extends JFrame {
-
-	private JPanel contentPane;
 
 	private JMenuBar MenuBar;
 	private JMenu MnPersonas;
@@ -91,6 +82,6 @@ public class Menu extends JFrame {
 	}
 
 	public void setMenuListar(JMenuItem menuListar) {
-		this.MnListar = MnListar;
+		this.MnListar = menuListar;
 	}
 }
