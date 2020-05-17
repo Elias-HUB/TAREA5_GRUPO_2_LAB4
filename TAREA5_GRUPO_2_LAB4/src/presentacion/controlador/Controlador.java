@@ -2,10 +2,13 @@ package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
 
 import entidad.Persona;
 import negocio.PersonaNegocio;
@@ -48,43 +51,77 @@ public class Controlador  implements ActionListener {
 		this.menu.getMenuAgregar().addActionListener(a->EventoClickMenu_AbrirPanel_AgregarPersona(a));		
 		this.menu.getMenuModificar().addActionListener(a->EventoClickMenu_AbrirPanel_ModificarPersona(a));
 		this.menu.getMenuListar().addActionListener(a->EventoClickMenu_AbrirPanel_Listar(a));
-		
+	
 		
 		
 		//Eventos PanelAgregarPersonas
 		this.pnlAgregar.getbtnAceptar().addActionListener(a->EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
-		//this.pnlListar.getBtnBorrar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelAgregarPersonas(s));
-			
+		
+		//Eventos PanelModificarPersonas
+		this.pnlModificar.getbtnModificar().addActionListener(s->EventoClickBoton_ModificarPesona_PanelModificarPersonas(s));
+		
 		//Eventos PanelEliminarPersonas
 		this.pnlEliminar.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));		
-		
 		
 		//Eventos PanelLista
 		//this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));
 		}
 	
-
 	private void EventoClickBoton_BorrarPesona_PanelEliminarPersonas(ActionEvent s) {
 		boolean estado=false;
 		//int filasSeleccionadas = this.pnlEliminar.getList().getSelectedIndex();
 		Persona persona = new Persona();
 		persona = this.pnlEliminar.getList().getSelectedValue();
 		String mensaje;
-		estado = pNeg.delete(persona);
-		if(estado==true)
+		if(persona==null)
 		{
-			mensaje="Persona eliminada con exito";	
+			mensaje="Seleccione una persona";
 		}
-		else
-		{
-			 mensaje="Id inexistente";
-		}
+		else 
+			{
+				estado = pNeg.delete(persona);
+				if(estado==true)
+				{
+					mensaje="Persona eliminada con exito";	
+				}
+				else
+				{
+					 mensaje="dni inexistente";
+				}
+			}
+		
 		this.pnlEliminar.mostrarMensaje(mensaje);
 		pnlEliminar.setListModelClear(listModel);
 		refrescarJlistEliminar();
 	}
 
-
+	private void EventoClickBoton_ModificarPesona_PanelModificarPersonas(ActionEvent s) 
+	{
+		boolean estado= false; 
+		Persona pMOD = new Persona();
+		pMOD.setApellido(pnlModificar.devuelveApellido());
+		pMOD.setNombre(pnlModificar.devuelveNombre());
+		pMOD.setDni(pnlModificar.devuelveDni());
+		String DniAux = pnlModificar.getDniAMod();
+		String mensaje; 
+		estado = pNeg.update(pMOD,DniAux);
+		if(estado==true)
+		{
+			mensaje="Persona modificada con exito";	
+	}
+		else
+		{
+			 mensaje="No se pudo modificar";
+		}
+		this.pnlModificar.mostrarMensaje(mensaje);
+		pnlModificar.setDni("");
+		pnlModificar.setApellido("");
+		pnlModificar.setNombre("");
+		pnlModificar.setListModel(listModel);
+		refrescarJlistModificar();
+		
+	}
+	
 	private void EventoClickBoton_AgregarPesona_PanelAgregarPersonas(ActionEvent a) {
 		
 		String nombre = this.pnlAgregar.gettxtNombre().getText();
@@ -107,9 +144,7 @@ public class Controlador  implements ActionListener {
 		this.pnlAgregar.mostrarMensaje(mensaje);		
 	}
 	
-	
-
-	//EventoClickMenu abrir PanelAgregarPersonas
+		//EventoClickMenu abrir PanelAgregarPersonas
 	public void  EventoClickMenu_AbrirPanel_AgregarPersona(ActionEvent a)
 	{		
 		menu.getContentPane().removeAll();
@@ -130,18 +165,43 @@ public class Controlador  implements ActionListener {
 	
 	public void refrescarJlistEliminar() {		
 		personasEnTabla = (ArrayList<Persona>) pNeg.readAll();
+		listModel.clear();
 		for (Persona item: personasEnTabla)
-			listModel.addElement(item);		
+			{
+				listModel.addElement(item);		
+			}
 		pnlEliminar.setListModel(listModel);
 	}
 	
 	
+	public void refrescarJlistModificar() {		
+		personasEnTabla = (ArrayList<Persona>) pNeg.readAll();
+		listModel.clear();
+		for (Persona item: personasEnTabla)
+		{
+			listModel.addElement(item);		
+			pnlModificar.setListModel(listModel);
+		}
+	}
+		
 	public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
 	{
 		menu.getContentPane().removeAll();
 		menu.getContentPane().add(pnlModificar);
 		menu.getContentPane().repaint();
 		menu.getContentPane().revalidate();	
+		pnlModificar.setListModel(listModel);
+		refrescarJlistModificar();
+		Persona per = new Persona();
+		if(pnlModificar.getList().getSelectedValue() != null)
+		{
+			per = this.pnlModificar.getList().getSelectedValue();
+			pnlModificar.setNombre(per.getNombre());
+			pnlModificar.setApellido(per.getApellido());
+			pnlModificar.setDni(per.getDni());
+			pnlModificar.update(null);
+		}
+		
 	}
 	
 	public void EventoClickMenu_AbrirPanel_Listar(ActionEvent a)
@@ -159,7 +219,6 @@ public class Controlador  implements ActionListener {
 	{
 		this.menu.setVisible(true);;
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

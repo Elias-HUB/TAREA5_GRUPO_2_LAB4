@@ -14,7 +14,7 @@ public class PersonaDaoImpl implements PersonaDao{
 	
 	private static final String insert = "INSERT INTO personas(dni, nombre, apellido) VALUES(?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE dni = ?";
-	private static final String update = "UPDATE FROM personas where dni = ?" ;
+	private static final String update = "UPDATE personas set dni=?, nombre=?, apellido=? where dni =?" ;
 	private static final String readall = "SELECT * FROM personas";
 
 	
@@ -69,7 +69,7 @@ public class PersonaDaoImpl implements PersonaDao{
 		return isdeleteExitoso;
 	}
 	
-	public boolean update(Persona persona_a_modificar)
+	public boolean update(Persona persona_a_modificar, String aux)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -78,6 +78,10 @@ public class PersonaDaoImpl implements PersonaDao{
 		{
 			statement = conexion.prepareStatement(update);
 			statement.setString(1, persona_a_modificar.getDni());
+			statement.setString(2, persona_a_modificar.getNombre());
+			statement.setString(3, persona_a_modificar.getApellido());
+			statement.setString(4, aux);
+			
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();

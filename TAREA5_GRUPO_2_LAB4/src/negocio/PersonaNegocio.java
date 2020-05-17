@@ -6,7 +6,7 @@ import entidad.Persona;
 
 public interface PersonaNegocio {
 	public boolean insert(Persona persona);
-	public boolean update(Persona persona_a_modificar);
+	public boolean update(Persona persona_a_modificar, String DniAux);
 	public boolean delete(Persona persona_a_eliminar);
 	public List<Persona> readAll();
 }

@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import entidad.Persona;
+
 import java.awt.BorderLayout;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -14,21 +17,30 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.FlowLayout;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.SwingConstants;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Modificar extends JPanel {
+	
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtDni;
-
-	/**
-	 * Create the panel.
-	 */
+	private JList<Persona> list;
+	private DefaultListModel<Persona> listModel;
+	private JButton btnModificar;
+	private JScrollPane scrollPane;
+	private MouseListener Click; 
+	private String DniAMod; 
+	
 	public Modificar() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0};
@@ -47,13 +59,28 @@ public class Modificar extends JPanel {
 		gbc_lblNewLabel.gridy = 1;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
-		JList list = new JList();
-		GridBagConstraints gbc_list = new GridBagConstraints();
-		gbc_list.insets = new Insets(0, 0, 5, 5);
-		gbc_list.fill = GridBagConstraints.BOTH;
-		gbc_list.gridx = 1;
-		gbc_list.gridy = 2;
-		add(list, gbc_list);
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 1;
+		gbc_scrollPane.gridy = 2;
+		add(scrollPane, gbc_scrollPane);
+		
+		list = new JList<Persona>();
+		list.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Persona p= new Persona();
+				p= list.getSelectedValue();
+				txtNombre.setText(p.getNombre());
+				txtApellido.setText(p.getApellido());
+				txtDni.setText(p.getDni());
+				DniAMod=p.getDni();
+			}
+		});
+		scrollPane.setViewportView(list);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -85,7 +112,7 @@ public class Modificar extends JPanel {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char Validar = e.getKeyChar();
-				if(!Character.isAlphabetic(Validar)) {
+				if(!Character.isAlphabetic(Validar) && Validar!= '\b') {
 				getToolkit().beep();
 				e.consume();
 				JOptionPane.showMessageDialog(getRootPane(), "Ingrese solamente letras");
@@ -100,7 +127,7 @@ public class Modificar extends JPanel {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char Validar = e.getKeyChar();
-				if(!Character.isDigit(Validar)) {
+				if(!Character.isDigit(Validar)&& Validar!= '\b') {
 				getToolkit().beep();
 				e.consume();
 				JOptionPane.showMessageDialog(getRootPane(), "Ingrese solamente numeros");
@@ -110,8 +137,76 @@ public class Modificar extends JPanel {
 		panel.add(txtDni);
 		txtDni.setColumns(10);
 		
-		JButton btnModificar = new JButton("Modificar");
+		btnModificar = new JButton("Modificar");
 		panel.add(btnModificar);
 
 	}
+
+
+	public JList<Persona> getList() {
+		return list;
+	}
+
+	public void setList(JList<Persona> list) {
+		this.list = list;
+	}
+
+	public JButton getbtnModificar() {
+		return btnModificar;
+	}
+
+	public void setbtnModificar(JButton btnModificar) {
+		this.btnModificar = btnModificar;
+	}
+
+	public DefaultListModel<Persona> getListModel() {
+		return listModel;
+	}
+	public void setListModel(DefaultListModel<Persona> listModelo) {		
+		this.list.setModel(listModelo);
+	}
+	
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje);		
+	}
+
+	public String devuelveApellido()
+	{
+		return txtApellido.getText();
+	}
+	
+	public void setApellido(String ap)
+	{
+		txtApellido.setText(ap);
+	}
+	
+	public String devuelveNombre()
+	{
+		return txtNombre.getText();
+	}
+	
+	public void setNombre(String no)
+	{
+		txtNombre.setText(no);
+	}
+	
+	public String devuelveDni()
+	{
+		return txtDni.getText();
+	}
+	
+	public void setDni(String dni)
+	{
+		txtDni.setText(dni);
+	}
+	public String getDniAMod()
+	{
+		return DniAMod;
+	}
+	
+	public MouseListener DevuelveClick()
+	{
+		return Click;
+	}
+
 }

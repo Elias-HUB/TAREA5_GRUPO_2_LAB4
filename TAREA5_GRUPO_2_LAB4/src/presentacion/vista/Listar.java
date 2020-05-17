@@ -40,6 +40,8 @@ public class Listar extends JPanel {
 		
 		modelPersonas = new DefaultTableModel(null,nombreColumnas);
 		tablaPersonas = new JTable(modelPersonas);
+		tablaPersonas.setRowSelectionAllowed(false);
+		tablaPersonas.setEnabled(false);
 		spPersonas.setViewportView(tablaPersonas);
 	}
 	

@@ -39,11 +39,17 @@ public class PersonaNegocioImpl implements PersonaNegocio{
 		return pdao.readAll();
 	}
 
-	
+
 	@Override
-	public boolean update(Persona persona_a_modificar) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Persona persona_a_modificar, String DniAux) {
+		boolean estado=false;
+		if(persona_a_modificar.getDni().trim().length() >0 )//También se puede preguntar si existe ese ID 
+		{
+			estado=pdao.update(persona_a_modificar,DniAux);
+		}
+		return estado;
 	}
+
+
 
 }

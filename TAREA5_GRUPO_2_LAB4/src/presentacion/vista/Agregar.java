@@ -46,7 +46,7 @@ public class Agregar extends JPanel {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char Validar = e.getKeyChar();
-				if(!Character.isAlphabetic(Validar)) {
+				if(!Character.isAlphabetic(Validar)&& Validar!= '\b') {
 				getToolkit().beep();
 				e.consume();
 				JOptionPane.showMessageDialog(getRootPane(), "Ingrese solamente letras");
@@ -74,7 +74,7 @@ public class Agregar extends JPanel {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char Validar = e.getKeyChar();
-				if(!Character.isAlphabetic(Validar)) {
+				if(!Character.isAlphabetic(Validar)&& Validar!= '\b') {
 				getToolkit().beep();
 				e.consume();
 				JOptionPane.showMessageDialog(getRootPane(), "Ingrese solamente letras");
@@ -103,7 +103,7 @@ public class Agregar extends JPanel {
 			@Override
 			public void keyTyped(KeyEvent e) {
 			char Validar = e.getKeyChar();
-						if(!Character.isDigit(Validar)) {
+						if(!Character.isDigit(Validar)&& Validar!= '\b') {
 						getToolkit().beep();
 						e.consume();
 						JOptionPane.showMessageDialog(getRootPane(), "Ingrese solamente numeros");

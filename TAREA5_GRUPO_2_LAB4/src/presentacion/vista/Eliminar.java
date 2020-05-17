@@ -100,8 +100,7 @@ public class Eliminar extends JPanel {
 		this.list.setModel(listModel);
 	}
 	
-	
-	
+		
 	public void mostrarMensaje(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje);		
 	}
