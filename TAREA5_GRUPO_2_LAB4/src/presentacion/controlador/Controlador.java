@@ -128,17 +128,22 @@ public class Controlador  implements ActionListener {
 		String apellido = this.pnlAgregar.gettxtApellido().getText();
 		String dni = this.pnlAgregar.gettxtDni().getText();
 		Persona nuevaPersona = new Persona(dni,nombre,apellido);
-		
-		boolean estado = pNeg.insert(nuevaPersona);
-		String mensaje;
-		if(estado==true)
+		String mensaje="";
+		if(nombre.length() != 0 && apellido.length() != 0 && dni.length() != 0)
 		{
-			mensaje="Persona agregada con exito";
-			this.pnlAgregar.gettxtNombre().setText("");
-			this.pnlAgregar.gettxtApellido().setText("");
-			this.pnlAgregar.gettxtDni().setText("");
+			boolean estado = pNeg.insert(nuevaPersona);
+			
+			if(estado==true)
+			{
+				mensaje="Persona agregada con exito";
+				this.pnlAgregar.gettxtNombre().setText("");
+				this.pnlAgregar.gettxtApellido().setText("");
+				this.pnlAgregar.gettxtDni().setText("");
+			}
 		}
+		
 		else
+			
 			mensaje="Persona no agregada, complete todos los campos";
 		
 		this.pnlAgregar.mostrarMensaje(mensaje);		
@@ -151,6 +156,9 @@ public class Controlador  implements ActionListener {
 		menu.getContentPane().add(pnlAgregar);
 		menu.getContentPane().repaint();
 		menu.getContentPane().revalidate();
+		this.pnlAgregar.gettxtNombre().setText("");
+		this.pnlAgregar.gettxtApellido().setText("");
+		this.pnlAgregar.gettxtDni().setText("");
 	}
 	
 	public void EventoClickMenu_AbrirPanel_EliminarPersona(ActionEvent e)
