@@ -127,6 +127,27 @@ public class Controlador implements ActionListener {
 			mensaje = "Persona no agregada, complete todos los campos";
 
 		this.pnlAgregar.mostrarMensaje(mensaje);
+		Persona nuevaPersona = new Persona(dni,nombre,apellido);
+		String mensaje="";
+		if(nombre.length() != 0 && apellido.length() != 0 && dni.length() != 0)
+		{
+			boolean estado = pNeg.insert(nuevaPersona);
+			
+			if(estado==true)
+			{
+				mensaje="Persona agregada con exito";
+				this.pnlAgregar.gettxtNombre().setText("");
+				this.pnlAgregar.gettxtApellido().setText("");
+				this.pnlAgregar.gettxtDni().setText("");
+			}
+		}
+		
+		else
+			
+			mensaje="Persona no agregada, complete todos los campos";
+		
+		this.pnlAgregar.mostrarMensaje(mensaje);		
+
 	}
 
 	// EventoClickMenu abrir PanelAgregarPersonas
@@ -135,6 +156,9 @@ public class Controlador implements ActionListener {
 		menu.getContentPane().add(pnlAgregar);
 		menu.getContentPane().repaint();
 		menu.getContentPane().revalidate();
+		this.pnlAgregar.gettxtNombre().setText("");
+		this.pnlAgregar.gettxtApellido().setText("");
+		this.pnlAgregar.gettxtDni().setText("");
 	}
 
 	public void EventoClickMenu_AbrirPanel_EliminarPersona(ActionEvent e) {
