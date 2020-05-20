@@ -4,6 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
 
 public class Menu extends JFrame {
 
@@ -38,6 +41,7 @@ public class Menu extends JFrame {
 		
 		MnListar = new JMenuItem("Listar");
 		MnPersonas.add(MnListar);
+		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 	}
 	

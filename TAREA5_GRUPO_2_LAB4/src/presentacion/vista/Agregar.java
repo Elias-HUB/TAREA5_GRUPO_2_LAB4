@@ -28,9 +28,9 @@ public class Agregar extends JPanel {
 	public Agregar() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 104, 214, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel = new JLabel("Nombre");
@@ -38,7 +38,7 @@ public class Agregar extends JPanel {
 		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 2;
-		gbc_lblNewLabel.gridy = 2;
+		gbc_lblNewLabel.gridy = 4;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
 		txtNombre = new JTextField();
@@ -57,7 +57,7 @@ public class Agregar extends JPanel {
 		gbc_txtNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_txtNombre.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtNombre.gridx = 3;
-		gbc_txtNombre.gridy = 2;
+		gbc_txtNombre.gridy = 4;
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 		
@@ -66,7 +66,7 @@ public class Agregar extends JPanel {
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 2;
-		gbc_lblNewLabel_1.gridy = 4;
+		gbc_lblNewLabel_1.gridy = 6;
 		add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		txtApellido = new JTextField();
@@ -85,7 +85,7 @@ public class Agregar extends JPanel {
 		gbc_txtApellido.insets = new Insets(0, 0, 5, 5);
 		gbc_txtApellido.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtApellido.gridx = 3;
-		gbc_txtApellido.gridy = 4;
+		gbc_txtApellido.gridy = 6;
 		add(txtApellido, gbc_txtApellido);
 		txtApellido.setColumns(10);
 		
@@ -94,7 +94,7 @@ public class Agregar extends JPanel {
 		gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_2.gridx = 2;
-		gbc_lblNewLabel_2.gridy = 6;
+		gbc_lblNewLabel_2.gridy = 8;
 		add(lblNewLabel_2, gbc_lblNewLabel_2);
 
 		
@@ -114,7 +114,7 @@ public class Agregar extends JPanel {
 		gbc_txtDni.insets = new Insets(0, 0, 5, 5);
 		gbc_txtDni.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtDni.gridx = 3;
-		gbc_txtDni.gridy = 6;
+		gbc_txtDni.gridy = 8;
 		add(txtDni, gbc_txtDni);
 		txtDni.setColumns(10);
 		
@@ -123,7 +123,7 @@ public class Agregar extends JPanel {
 		gbc_btnAceptar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnAceptar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnAceptar.gridx = 2;
-		gbc_btnAceptar.gridy = 8;
+		gbc_btnAceptar.gridy = 10;
 		add(btnAceptar, gbc_btnAceptar);
 	}
 
