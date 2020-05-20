@@ -42,17 +42,6 @@ public class Agregar extends JPanel {
 		add(lblNewLabel, gbc_lblNewLabel);
 		
 		txtNombre = new JTextField();
-		txtNombre.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char Validar = e.getKeyChar();
-				if(!Character.isAlphabetic(Validar)&& Validar!= '\b') {
-				getToolkit().beep();
-				e.consume();
-				JOptionPane.showMessageDialog(getRootPane(), "Ingrese solamente letras");
-			}
-			}
-		});
 		GridBagConstraints gbc_txtNombre = new GridBagConstraints();
 		gbc_txtNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_txtNombre.fill = GridBagConstraints.HORIZONTAL;
@@ -70,17 +59,6 @@ public class Agregar extends JPanel {
 		add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		txtApellido = new JTextField();
-		txtApellido.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char Validar = e.getKeyChar();
-				if(!Character.isAlphabetic(Validar)&& Validar!= '\b') {
-				getToolkit().beep();
-				e.consume();
-				JOptionPane.showMessageDialog(getRootPane(), "Ingrese solamente letras");
-			}
-	}
-		});
 		GridBagConstraints gbc_txtApellido = new GridBagConstraints();
 		gbc_txtApellido.insets = new Insets(0, 0, 5, 5);
 		gbc_txtApellido.fill = GridBagConstraints.HORIZONTAL;
@@ -99,17 +77,6 @@ public class Agregar extends JPanel {
 
 		
 		txtDni = new JTextField();
-		txtDni.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-			char Validar = e.getKeyChar();
-						if(!Character.isDigit(Validar)&& Validar!= '\b') {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(getRootPane(), "Ingrese solamente numeros");
-					}
-			}
-		});
 		GridBagConstraints gbc_txtDni = new GridBagConstraints();
 		gbc_txtDni.insets = new Insets(0, 0, 5, 5);
 		gbc_txtDni.fill = GridBagConstraints.HORIZONTAL;
@@ -150,8 +117,7 @@ public class Agregar extends JPanel {
 	public void settxtApellido(JTextField TxtApellido) {
 		this.txtApellido = TxtApellido;
 	}
-	
-	
+
 	public JButton getbtnAceptar() {
 		return btnAceptar;
 	}

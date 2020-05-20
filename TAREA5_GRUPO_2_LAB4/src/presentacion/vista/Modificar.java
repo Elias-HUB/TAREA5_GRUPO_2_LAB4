@@ -81,32 +81,10 @@ public class Modificar extends JPanel {
 		txtNombre.setColumns(10);
 
 		txtApellido = new JTextField();
-		txtApellido.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char Validar = e.getKeyChar();
-				if (!Character.isAlphabetic(Validar) && Validar != '\b') {
-					getToolkit().beep();
-					e.consume();
-					JOptionPane.showMessageDialog(getRootPane(), "Ingrese solamente letras");
-				}
-			}
-		});
 		panel.add(txtApellido);
 		txtApellido.setColumns(10);
 
 		txtDni = new JTextField();
-		txtDni.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char Validar = e.getKeyChar();
-				if (!Character.isDigit(Validar) && Validar != '\b') {
-					getToolkit().beep();
-					e.consume();
-					JOptionPane.showMessageDialog(getRootPane(), "Ingrese solamente numeros");
-				}
-			}
-		});
 		panel.add(txtDni);
 		txtDni.setColumns(10);
 
@@ -158,7 +136,15 @@ public class Modificar extends JPanel {
 	public JTextField GettxtNombre() {
 		return txtNombre;
 	}
-
+	
+	public JTextField GettxtApellido() {
+		return txtApellido;
+	}
+	
+	public JTextField GettxtDni() {
+		return txtDni;
+	}
+	
 	public void setNombre(String no) {
 		txtNombre.setText(no);
 	}

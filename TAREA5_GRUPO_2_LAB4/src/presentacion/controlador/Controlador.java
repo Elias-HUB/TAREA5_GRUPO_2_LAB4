@@ -53,17 +53,23 @@ public class Controlador implements ActionListener {
 
 		// Eventos PanelAgregarPersonas
 		this.pnlAgregar.getbtnAceptar().addActionListener(a -> EventoClickBoton_AgregarPesona_PanelAgregarPersonas(a));
-
+		EventoAgregarValidarGetTxtDni();
+		EventoAgregarValidarGetTxtNombre();
+		EventoAgregarValidarGetTxtApellido();
 		// Eventos PanelModificarPersonas
 		this.pnlModificar.getbtnModificar()
 				.addActionListener(s -> EventoClickBoton_ModificarPesona_PanelModificarPersonas(s));
 		EventoGettxtNombreaddKeyListener();
+		EventoGettxtApellidoaddKeyListener();
+		EventoGettxtDniaddKeyListener();
 		EventoGetJlisaddMouseListener();
+		
+		
 
 		// Eventos PanelEliminarPersonas
 		this.pnlEliminar.getBtnEliminar()
 				.addActionListener(s -> EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));
-	}
+		}
 
 	private void EventoClickBoton_BorrarPesona_PanelEliminarPersonas(ActionEvent s) {
 		boolean estado = false;
@@ -88,25 +94,34 @@ public class Controlador implements ActionListener {
 
 	private void EventoClickBoton_ModificarPesona_PanelModificarPersonas(ActionEvent s) {
 		boolean estado = false;
-		Persona pMOD = new Persona();
-		pMOD.setApellido(pnlModificar.devuelveApellido());
-		pMOD.setNombre(pnlModificar.devuelveNombre());
-		pMOD.setDni(pnlModificar.devuelveDni());
-		String DniAux = pnlModificar.getDniAMod();
 		String mensaje;
-		estado = pNeg.update(pMOD, DniAux);
-		if (estado == true) {
-			mensaje = "Persona modificada con exito";
-		} else {
-			mensaje = "No se pudo modificar";
+		if(pnlModificar.devuelveApellido().length() == 0 || pnlModificar.devuelveNombre().length() == 0 || pnlModificar.devuelveDni().length() == 0)
+		{
+			mensaje ="Complete todos los campos";
+		}
+		else
+		{
+			Persona pMOD = new Persona();
+			pMOD.setApellido(pnlModificar.devuelveApellido());
+			pMOD.setNombre(pnlModificar.devuelveNombre()); 
+			pMOD.setDni(pnlModificar.devuelveDni());
+			String DniAux = pnlModificar.getDniAMod();
+			
+			estado = pNeg.update(pMOD, DniAux);
+			if (estado == true) {
+				mensaje = "Persona modificada con exito";
+			} else {
+				mensaje = "No se pudo modificar";
+			}
+			
+			pnlModificar.setDni("");
+			pnlModificar.setApellido("");
+			pnlModificar.setNombre("");
+			pnlModificar.setListModel(listModel);
+			refrescarJlistModificar();
+			
 		}
 		this.pnlModificar.mostrarMensaje(mensaje);
-		pnlModificar.setDni("");
-		pnlModificar.setApellido("");
-		pnlModificar.setNombre("");
-		pnlModificar.setListModel(listModel);
-		refrescarJlistModificar();
-
 	}
 
 	private void EventoClickBoton_AgregarPesona_PanelAgregarPersonas(ActionEvent a) {
@@ -127,27 +142,6 @@ public class Controlador implements ActionListener {
 			mensaje = "Persona no agregada, complete todos los campos";
 
 		this.pnlAgregar.mostrarMensaje(mensaje);
-		Persona nuevaPersona = new Persona(dni,nombre,apellido);
-		String mensaje="";
-		if(nombre.length() != 0 && apellido.length() != 0 && dni.length() != 0)
-		{
-			boolean estado = pNeg.insert(nuevaPersona);
-			
-			if(estado==true)
-			{
-				mensaje="Persona agregada con exito";
-				this.pnlAgregar.gettxtNombre().setText("");
-				this.pnlAgregar.gettxtApellido().setText("");
-				this.pnlAgregar.gettxtDni().setText("");
-			}
-		}
-		
-		else
-			
-			mensaje="Persona no agregada, complete todos los campos";
-		
-		this.pnlAgregar.mostrarMensaje(mensaje);		
-
 	}
 
 	// EventoClickMenu abrir PanelAgregarPersonas
@@ -198,16 +192,6 @@ public class Controlador implements ActionListener {
 		pnlModificar.setApellido("");
 		pnlModificar.setNombre("");
 		refrescarJlistModificar();
-		/*
-		Persona per = new Persona();
-
-		if (pnlModificar.getList().getSelectedValue() != null) {
-			per = this.pnlModificar.getList().getSelectedValue();
-			pnlModificar.setNombre(per.getNombre());
-			pnlModificar.setApellido(per.getApellido());
-			pnlModificar.setDni(per.getDni());
-			pnlModificar.update(null);
-		} */
 
 	}
 
@@ -232,6 +216,77 @@ public class Controlador implements ActionListener {
 
 	private void EventoGettxtNombreaddKeyListener() {
 		this.pnlModificar.GettxtNombre().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char Validar = e.getKeyChar();
+				if (!Character.isAlphabetic(Validar) && Validar != '\b') {
+					pnlModificar.getToolkit().beep();
+					e.consume();
+					pnlModificar.MostarMensaje("Ingrese solamente letras");
+				}
+			}
+		});
+	}
+	
+	private void EventoGettxtApellidoaddKeyListener() {
+		this.pnlModificar.GettxtApellido().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char Validar = e.getKeyChar();
+				if (!Character.isAlphabetic(Validar) && Validar != '\b') {
+					pnlModificar.getToolkit().beep();
+					e.consume();
+					pnlModificar.MostarMensaje("Ingrese solamente letras");
+				}
+			}
+		});
+	}
+	
+	private void EventoGettxtDniaddKeyListener() {
+		this.pnlModificar.GettxtDni().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char Validar = e.getKeyChar();
+				if (!Character.isDigit(Validar) && Validar != '\b') {
+					pnlModificar.getToolkit().beep();
+					e.consume();
+					pnlModificar.MostarMensaje("Ingrese solamente numeros");
+				}
+			}
+		});
+	}
+
+	private void EventoAgregarValidarGetTxtDni()
+	{
+		this.pnlAgregar.gettxtDni().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char Validar = e.getKeyChar();
+				if (!Character.isDigit(Validar) && Validar != '\b') {
+					pnlModificar.getToolkit().beep();
+					e.consume();
+					pnlModificar.MostarMensaje("Ingrese solamente numeros");
+				}
+			}
+		});
+	}
+	private void EventoAgregarValidarGetTxtNombre()
+	{
+		this.pnlAgregar.gettxtNombre().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char Validar = e.getKeyChar();
+				if (!Character.isAlphabetic(Validar) && Validar != '\b') {
+					pnlModificar.getToolkit().beep();
+					e.consume();
+					pnlModificar.MostarMensaje("Ingrese solamente letras");
+				}
+			}
+		});
+	}
+	private void EventoAgregarValidarGetTxtApellido()
+	{
+		this.pnlAgregar.gettxtApellido().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char Validar = e.getKeyChar();
