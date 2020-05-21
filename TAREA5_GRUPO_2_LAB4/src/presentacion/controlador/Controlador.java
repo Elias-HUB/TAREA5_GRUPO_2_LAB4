@@ -63,13 +63,11 @@ public class Controlador implements ActionListener {
 		EventoGettxtApellidoaddKeyListener();
 		EventoGettxtDniaddKeyListener();
 		EventoGetJlisaddMouseListener();
-		
-		
 
 		// Eventos PanelEliminarPersonas
 		this.pnlEliminar.getBtnEliminar()
 				.addActionListener(s -> EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));
-		}
+	}
 
 	private void EventoClickBoton_BorrarPesona_PanelEliminarPersonas(ActionEvent s) {
 		boolean estado = false;
@@ -95,31 +93,29 @@ public class Controlador implements ActionListener {
 	private void EventoClickBoton_ModificarPesona_PanelModificarPersonas(ActionEvent s) {
 		boolean estado = false;
 		String mensaje;
-		if(pnlModificar.devuelveApellido().length() == 0 || pnlModificar.devuelveNombre().length() == 0 || pnlModificar.devuelveDni().length() == 0)
-		{
-			mensaje ="Complete todos los campos";
-		}
-		else
-		{
+		if (pnlModificar.devuelveApellido().length() == 0 || pnlModificar.devuelveNombre().length() == 0
+				|| pnlModificar.devuelveDni().length() == 0) {
+			mensaje = "Complete todos los campos";
+		} else {
 			Persona pMOD = new Persona();
 			pMOD.setApellido(pnlModificar.devuelveApellido());
-			pMOD.setNombre(pnlModificar.devuelveNombre()); 
+			pMOD.setNombre(pnlModificar.devuelveNombre());
 			pMOD.setDni(pnlModificar.devuelveDni());
 			String DniAux = pnlModificar.getDniAMod();
-			
+
 			estado = pNeg.update(pMOD, DniAux);
 			if (estado == true) {
 				mensaje = "Persona modificada con exito";
 			} else {
 				mensaje = "No se pudo modificar";
 			}
-			
+
 			pnlModificar.setDni("");
 			pnlModificar.setApellido("");
 			pnlModificar.setNombre("");
 			pnlModificar.setListModel(listModel);
 			refrescarJlistModificar();
-			
+
 		}
 		this.pnlModificar.mostrarMensaje(mensaje);
 	}
@@ -131,27 +127,21 @@ public class Controlador implements ActionListener {
 		String dni = this.pnlAgregar.gettxtDni().getText();
 		Persona nuevaPersona = new Persona(dni, nombre, apellido);
 		String mensaje;
-		try
-		{
+		try {
 			boolean estado = pNeg.insert(nuevaPersona);
-				if (estado == true)
-				{
+			if (estado == true) {
 				mensaje = "Persona agregada con exito";
 				this.pnlAgregar.gettxtNombre().setText("");
 				this.pnlAgregar.gettxtApellido().setText("");
 				this.pnlAgregar.gettxtDni().setText("");
-				} 
-				else
-				{
-				 mensaje = "Persona no agregada, complete todos los campos";
-				}
-				
+			} else if (nombre.length() == 0 || apellido.length() == 0 || dni.length() == 0) {
+				mensaje = "Persona no agregada, complete todos los campos";
+			} else {
+				mensaje = "DNI Repetido";
+			}
+		} catch (Exception ex) {
+			mensaje = "Error";
 		}
-		catch(Exception ex)
-		{
-			mensaje="DNI Repetido";
-		}
-		
 
 		this.pnlAgregar.mostrarMensaje(mensaje);
 	}
@@ -171,7 +161,7 @@ public class Controlador implements ActionListener {
 		menu.getContentPane().removeAll();
 		menu.getContentPane().add(pnlEliminar);
 		menu.getContentPane().repaint();
-		menu.getContentPane().revalidate();		
+		menu.getContentPane().revalidate();
 		pnlEliminar.setListModelClear(listModel);
 		refrescarJlistEliminar();
 	}
@@ -239,7 +229,7 @@ public class Controlador implements ActionListener {
 			}
 		});
 	}
-	
+
 	private void EventoGettxtApellidoaddKeyListener() {
 		this.pnlModificar.GettxtApellido().addKeyListener(new KeyAdapter() {
 			@Override
@@ -253,7 +243,7 @@ public class Controlador implements ActionListener {
 			}
 		});
 	}
-	
+
 	private void EventoGettxtDniaddKeyListener() {
 		this.pnlModificar.GettxtDni().addKeyListener(new KeyAdapter() {
 			@Override
@@ -268,8 +258,7 @@ public class Controlador implements ActionListener {
 		});
 	}
 
-	private void EventoAgregarValidarGetTxtDni()
-	{
+	private void EventoAgregarValidarGetTxtDni() {
 		this.pnlAgregar.gettxtDni().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -282,8 +271,8 @@ public class Controlador implements ActionListener {
 			}
 		});
 	}
-	private void EventoAgregarValidarGetTxtNombre()
-	{
+
+	private void EventoAgregarValidarGetTxtNombre() {
 		this.pnlAgregar.gettxtNombre().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -296,8 +285,8 @@ public class Controlador implements ActionListener {
 			}
 		});
 	}
-	private void EventoAgregarValidarGetTxtApellido()
-	{
+
+	private void EventoAgregarValidarGetTxtApellido() {
 		this.pnlAgregar.gettxtApellido().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
