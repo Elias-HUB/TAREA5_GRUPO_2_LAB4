@@ -130,16 +130,28 @@ public class Controlador implements ActionListener {
 		String apellido = this.pnlAgregar.gettxtApellido().getText();
 		String dni = this.pnlAgregar.gettxtDni().getText();
 		Persona nuevaPersona = new Persona(dni, nombre, apellido);
-
-		boolean estado = pNeg.insert(nuevaPersona);
 		String mensaje;
-		if (estado == true) {
-			mensaje = "Persona agregada con exito";
-			this.pnlAgregar.gettxtNombre().setText("");
-			this.pnlAgregar.gettxtApellido().setText("");
-			this.pnlAgregar.gettxtDni().setText("");
-		} else
-			mensaje = "Persona no agregada, complete todos los campos";
+		try
+		{
+			boolean estado = pNeg.insert(nuevaPersona);
+				if (estado == true)
+				{
+				mensaje = "Persona agregada con exito";
+				this.pnlAgregar.gettxtNombre().setText("");
+				this.pnlAgregar.gettxtApellido().setText("");
+				this.pnlAgregar.gettxtDni().setText("");
+				} 
+				else
+				{
+				 mensaje = "Persona no agregada, complete todos los campos";
+				}
+				
+		}
+		catch(Exception ex)
+		{
+			mensaje="DNI Repetido";
+		}
+		
 
 		this.pnlAgregar.mostrarMensaje(mensaje);
 	}
